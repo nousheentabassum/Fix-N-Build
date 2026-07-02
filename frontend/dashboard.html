@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In - FixNBuild</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<style>
+   /* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: black;
+  text-align: center;
+  line-height: 1.6;
+}
+  
+header {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+  color: #ff4500; /* Match the CTA button color */
+}
+
+  .signin-container {
+    max-width: 400px;
+    margin: 60px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  form input[type="email"],
+  form input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  form button {
+    padding: 10px 25px;
+    background: #ff4500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background: #e03e00;
+  }
+  
+  .signin-container p {
+    margin-top: 15px;
+  }
+</style>  
+<body>
+    <header>
+    <div class="logo">FixNBuild</div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="dashboard.html">Sign In</a></li>
+            
+            
+        </ul>
+    </nav>
+</header>
+<section class="signup-container">
+  <h2>Create an Account</h2>
+  <form id="signupForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+  
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" required />
+  
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+  
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required />
+  
+    <button type="submit">Sign Up</button>
+  </form>
+  
+  
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const signinForm = document.getElementById("signupForm");
+    
+
+    if (signinForm) {
+      signinForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+
+        try {
+          const res = await fetch('http://localhost:5000/users', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, email, password, phone }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            alert(data.message || "Sign In failed");
+            return;
+          }
+
+          alert("Sign In successful!");
+          window.location.href = "dashboard.html"; // Redirect to the dashboard after successful sign-in
+        } catch (error) {
+          alert("Something went wrong. Please try again.");
+          console.error(error);
+        }
+      });
+    } else {
+      console.error("signinForm not found in the DOM!");
+    }
+  });
+</script>  
+</section>
+</body>
+</html>

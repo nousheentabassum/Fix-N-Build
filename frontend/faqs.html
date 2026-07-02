@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - FixNBuild</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url('background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        line-height: 1.6;
+    }
+    .faqs {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+            
+    }
+        
+    .faq-item {
+        background-color: #f2f2f2;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .faq-item h3 {
+        margin: 0;
+        padding: 15px 20px;
+        background-color: #00695c;
+        color: white;
+    }
+
+    .faq-item p {
+        padding: 0 20px 15px 20px;
+        display: none;
+        background-color: #fff;
+    }
+
+    .faq-item.active p {
+        display: block;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #eee;
+        margin-top: 40px;
+    }
+    .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: black;
+    }
+
+/* Navigation Menu */
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        color: black;
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+    nav ul li a:hover {
+        text-decoration: underline;
+        color: #ff4500; /* Match the CTA button color */
+    }
+</style>
+<body>
+    <header>
+        <div class="logo">FixNBuild</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="faqs.html">FAQ'S</a></li>
+                
+                
+            </ul>
+        </nav>
+    </header>
+
+    <section class="faqs">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <h3>How does FixNBuild work?</h3>
+            <p>FixNBuild provides expert construction, renovation, and repair services. You can book a service, schedule a visit, and get professional help at your convenience.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Pricing & Estimates</h3>
+            <p>Our pricing depends on the service type and scope of work. You can request a free quote through our website.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Service Areas</h3>
+            <p>We currently operate in major cities and regions. Contact us to check availability in your area.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Guarantees & Warranty</h3>
+            <p>We offer warranties on our construction and repair work to ensure quality and customer satisfaction.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 FixNBuild. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach(item => {
+            item.addEventListener("click", () => {
+                item.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+</html>

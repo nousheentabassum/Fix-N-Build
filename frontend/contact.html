@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FixNBuild</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FixNBuild</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="contact.html">Contact</a></li>
+                <li><a href="services.html">Services</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="contact-page">
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <p>Reach out to us for inquiries, complaints, or custom requests.</p>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            
+                <button type="submit">Submit</button>
+            </form>
+            
+            <script>
+                document.getElementById('contactForm').addEventListener('submit', async function (e) {
+                    e.preventDefault();
+            
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+            
+                    try {
+                        const res = await fetch('http://localhost:5000/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, email, message })
+                        });
+            
+                        const data = await res.json();
+                        if (res.ok) {
+                            alert("Your message was sent!");
+                        } else {
+                            alert(`Error: ${data.message}`);
+                        }
+                    } catch (error) {
+                        alert("Error: Something went wrong");
+                    }
+                });
+            </script>
+            
+        <section class="location">
+            <h2>Our Location</h2>
+            <p>Visit our office at:</p>
+            <p>123 FixNBuild Street, Hyderabad, India</p>
+            <div id="map">
+                <!-- Google Maps embed goes here -->
+            </div>
+        </section>
+
+        <section class="contact-info">
+            <h2>Contact Information</h2>
+            <p><strong>Phone:</strong> +91 9876543210</p>
+            <p><strong>Email:</strong> support@fixnbuild.com</p>
+            <p><strong>WhatsApp:</strong> +91 9876543210</p>
+        </section>
+
+        <section class="social-media">
+            <h2>Follow Us</h2>
+            <p>Stay connected on social media:</p>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 FixNBuild. All rights reserved.</p>
+    </footer>
+</body>
+</html>

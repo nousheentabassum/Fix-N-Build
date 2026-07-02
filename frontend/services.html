@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - FixNBuild</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+    .services, .construction, .renovation, .repair, .custom-projects, .pricing, .booking {
+        padding: 20px;
+        margin-bottom: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .services h2, .construction h2, .renovation h2, .repair h2, .custom-projects h2, .pricing h2, .booking h2 {
+        color: #333;
+    }
+
+    .cta-button, button[type="submit"] {
+        background-color: #5CB85C;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .cta-button:hover, button[type="submit"]:hover {
+        background-color: #4cae4c;
+    }
+
+    form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+    form input, form select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    form input[type="date"], form input[type="time"] {
+        width: 48%;
+        display: inline-block;
+    }
+
+    form input[type="text"], form input[type="tel"], form select {
+        width: 100%;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #eee;
+        margin-top: 40px;
+    }
+</style>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="services">
+        <h2>Our Services</h2>
+        <p>We offer a comprehensive range of construction, renovation, and repair services tailored to your needs.</p>
+    </section>
+
+    <section class="construction">
+        <h2>Construction Services</h2>
+        <p>We specialize in residential, commercial, and industrial construction projects, ensuring high-quality workmanship and durability.</p>
+    </section>
+
+    <section class="renovation">
+        <h2>Renovation & Remodeling</h2>
+        <p>Transform your space with our expert remodeling services, including kitchen, bathroom, office, and full home makeovers.</p>
+    </section>
+
+    <section class="repair">
+        <h2>Repair & Maintenance</h2>
+        <p>Our team provides plumbing, electrical, roofing, painting, and other essential maintenance services to keep your property in top condition.</p>
+    </section>
+
+    <section class="custom-projects">
+        <h2>Custom Projects</h2>
+        <p>Have a unique vision? We handle special requests such as interior design, smart home installations, and more.</p>
+    </section>
+
+    <section class="pricing">
+        <h2>Pricing & Packages</h2>
+        <p>Explore our cost estimates or request a custom quote to fit your budget and project requirements.</p>
+        <a href="contact.html" class="cta-button">Get a Quote</a>
+    </section>
+    
+    <section class="booking">
+        <h2>Book a Service</h2>
+        <form id="booking-form">
+            <label for="service">Select Service:</label>
+            <select id="service" name="service" required>
+                <option value="construction">Construction</option>
+                <option value="renovation">Renovation & Remodeling</option>
+                <option value="repair">Repair & Maintenance</option>
+                <option value="custom">Custom Projects</option>
+            </select>
+            
+            <label for="date">Choose Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="time">Choose Time:</label>
+            <input type="time" id="time" name="time" required>
+            
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="address">Your Address:</label>
+            <input type="text" id="address" name="address" required>
+            
+            <label for="contact">Contact Number:</label>
+            <input type="tel" id="contact" name="contact" required>
+            
+            <label for="payment">Payment Option:</label>
+            <select id="payment" name="payment" required>
+                <option value="">-- Select Payment Option --</option> <!-- Default empty option -->
+                <option value="online">Online Payment</option>
+                <option value="cash">Pay on Service</option>
+            </select>
+            
+            <button type="submit">Book Now</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 FixNBuild. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById("booking-form").addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const formData = {
+                    service: document.getElementById("service").value,
+                    date: document.getElementById("date").value,
+                    time: document.getElementById("time").value,
+                    name: document.getElementById("name").value,
+                    address: document.getElementById("address").value,
+                    contact: document.getElementById("contact").value,
+                    payment: document.getElementById("payment").value,
+                };
+
+                console.log("Form Data:", formData); // Debugging step to log form data
+
+                try {
+                    const response = await fetch("http://localhost:5000/bookings", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                    });
+
+                    if (response.ok) {
+                        alert("Booking successful! 🎉");
+                        document.getElementById("booking-form").reset();
+                    } else {
+                        const errorData = await response.json();
+                        alert(`Booking failed: ${errorData.message}`);
+                    }
+                } catch (err) {
+                    console.error("Error:", err);
+                    alert("Server error. Please try again later.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
